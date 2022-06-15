@@ -1,9 +1,10 @@
 #_______________Импорты________________
-from flask import Flask,render_template,url_for,request,flash,redirect, session
+from flask import Flask,render_template,url_for,request,flash,redirect, session,send_from_directory
 import sql
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+from os import path
 #_______Регистрация приложения_______
 app=Flask(__name__)
 app.config.from_object(__name__)
@@ -33,7 +34,8 @@ def login():
 #Пользователи
 @app.route("/user/",methods=["POST","GET"])
 def user():
-    return render_template("user.html",email=session["email"])
+    return render_template("user.html",email=session["email"],
+letter=sql.letter_my(session["email"]))
     
 
 
@@ -62,13 +64,35 @@ def user_send():
         request.files["file_5"].filename,
         datetime.now()
         )
-        file = request.files['file_1']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        if request.files['file_1']:
+            file = request.files['file_1']
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        if request.files['file_2']:
+            file= request.files['file_2']
+            filename= secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        if request.files['file_3']:
+            file= request.files['file_3']
+            filename= secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        if request.files['file_4']:
+            file= request.files['file_4']
+            filename= secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        if request.files['file_5']:
+            file= request.files['file_5']
+            filename= secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
     return render_template("send.html")
 
    
- 
+@app.route("/user/letter/<tocen>",methods=["POST","GET"])
+def user_letter(tocen):
+         pismo=sql.letter_read(session['email'],tocen)
+         if pismo:
+             return render_template("letter.html",letter=sql.letter_read(session['email'],tocen))
+         return "Письмо не найдено"
          
             
                
@@ -82,7 +106,10 @@ def user_send():
                                        
                                           
                                              
-                                                
+@app.route('/download/<path:filename>', methods=['GET', 'POST'])
+def download():
+    directory = path.join(app.root_path, app.config['FOLDER_WIT_FILE'])
+    return send_from_directory(directory=directory, filename=filename)                                                
                                                    
                                                       
                                                          
