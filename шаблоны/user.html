@@ -19,6 +19,7 @@
     
     
 <h1>Приветсвуем,{{email}}</h1>
+
 <h5 id="_">Описание</h5>
 <div id="text"></div>
 <input type="text" id="text_input">
@@ -36,8 +37,31 @@
       <button class="mun" id="m10">10</button>
    </div>
 </div>
+
+  <div id="menu_i">Drop-Down</div>
+
+  <div id="menu_io">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>
+<div class="la">
+{%for i in letter%}
+
+
+    <div class="lu"><h1><a href="/user/letter/{{i[9]}}">{{i[1]}}|{{i[2]}}</a></h1></div>
+    <p></p>
+
+{%endfor%}
+</div>
+
+
+
+
 <script src="/storage/emulated/0/Flask/Email/static/js/app_user.js"></script>
 <script src="{{ url_for('static', filename='js/app_user.js') }}"></script>
+ <a href="/user/send"><img id="send" src="https://cdn-icons-png.flaticon.com/512/14/14202.png"></a>
  
 </body>
 </html>
