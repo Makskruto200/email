@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/storage/emulated/0/Flask/Email/static/css/style_user.css">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_user.css') }}">
+         <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+     
+    
+</head>
+<body>
+    <div id="fon">
+   <div id="submenu">
+      <button class="mun"id="m1">1</button>
+      <button class="mun" id="m2">2</button>
+      <button class="mun" id="m3">3</button>
+      <button class="mun" id="m4">4</button>
+      <button class="mun" id="m5">5</button>
+      <button class="mun" id="m6">6</button>
+      <button class="mun" id="m7">7</button>
+      <button class="mun" id="m8">8</button>
+      <button class="mun" id="m9">9</button>
+      <button class="mun" id="m10">10</button>
+   </div>
+</div>
+    {%for i in letter%}
+     <От кокого:{{i[0]}}
+     <hr>
+     <h1>{{i[2]}}</h1>
+     <hr
+     <hr>
+     <h1>Дата отправки:{{i[8]}}</h1>
+     {%if i[3] %}
+      <p><a href="{{ url_for('static', filename='file/'+i[3]) }}" download>Скачать файл</a>
+     {%endif%}
+     {%if i[4] %}
+      <p><a href="{{ url_for('static', filename='file/'+i[4]) }}" download>Скачать файл</a>
+     {%endif%}
+     {%if i[5] %}
+      <p><a href="{{ url_for('static', filename='file/'+i[5]) }}" download>Скачать файл</a>
+     {%endif%}
+     {%if i[6] %}
+      <p><a href="{{ url_for('static', filename='file/'+i[6]) }}" download>Скачать файл</a>
+     {%endif%}
+     {%if i[7] %}
+      <p><a href="{{ url_for('static', filename='file/'+i[7]) }}" download>Скачать файл</a>
+     {%endif%}
+     
+    {%endfor%}
+   
+   
+   <script src="/storage/emulated/0/Flask/Email/static/js/app_user.js"></script>
+<script src="{{ url_for('static', filename='js/app_user.js') }}"></script>
+</body>
+</html>
